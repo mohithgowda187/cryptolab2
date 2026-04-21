@@ -1,4 +1,5 @@
-1a Badstore
+5a 
+Badstore
 Go to browser 
 Put ipaddress
 Login as admin' -- 
@@ -10,7 +11,7 @@ Storage
 Change the value
 Again view cart 
 
-1b
+5b
 sudo python3
 from scapy.all import *
 myframe=Ether()/IP() 
@@ -23,7 +24,7 @@ packet.show()
 packet.summary()
 
 
-1c
+5c
 
 nano port_scan.sh
 inside
@@ -46,20 +47,21 @@ chmod +x port_scan.sh
 
 ------------------------------------------------------
 
-2a badstore
+6a
+badstore
 Go to browser 
 Put ipaddress
 Login as joe@supplier.com' --
 View previous orders
 
-2b
+6b
 sudo python3
 from scapy.all import *
 pac=sniff(count=10)
 pac.summary()
 
 
-2c
+6c
 1st termianl
 nc -vlp 1234
 2nd terminal
@@ -74,13 +76,13 @@ nc ipaddr 1234
 ------------------------------------------------------
 
 
-3a
+7a
 sudo python3
 from scapy.all import *
 result, unanswered = traceroute(["www.example.com", "www.google.com"], maxttl=20)
 result.show()
 
-3b
+7b
 nc www.example.com 80
 GET / HTTP/1.1
 Host: example.com
@@ -89,7 +91,7 @@ nc www.example.com 80
 HEAD / HTTP/1.1
 Host: example.com
 
-3c 
+7c 
 nmap -sn 127.0.0.1
 
 nmap -sn 127.0.0.1/24
@@ -97,7 +99,7 @@ nmap -sn 127.0.0.1/24
 ------------------------------------------------------
 
 
-4a
+8a
 ifconfig
 nano scanner.py
 inside 
@@ -122,7 +124,7 @@ for element in clients:
 
 sudo python3 scanner.py
 
-4b
+8b
 
 nc -l -p 5000
 Go to browser 
@@ -137,14 +139,15 @@ Hello from Netcat!
 
 Go again to browser and see the output 
 
-4c 
+8c 
 nmap -sn 127.0.0.100-200
 nmap -sn 127.0.0.0/24
 
 ------------------------------------------------------
 
 
-5a Badstore
+9a 
+Badstore
 Go to browser 
 Put ipaddress
 Login as admin' -- 
@@ -155,10 +158,10 @@ Remove max length
 Add script
 <script>alert(document.cookie)</script>
 
-5b
-same as 1c
+9b
+same as 5c
 
-5c 
+9c 
 nmap 127.0.1.1
 
 nmap -sV 127.0.1.1
@@ -166,15 +169,15 @@ nmap -sV 127.0.1.1
 ------------------------------------------------------
 
 
-6a Badstore(same as 5a)
+10a Badstore(same as 9a)
 <script>alert(document.cookie)</script>
 
-6b 
+10b 
 nmap -O 127.0.1.1
 
 nmap -A 127.0.1.1
 
-6c Badstore
+10c Badstore
 Go to browser 
 Put ipaddress
 Login as admin' -- 
@@ -193,7 +196,7 @@ Right click , view page source
 Search for hidden
 ------------------------------------------------------
 
-7a
+11a
 sudo python3
 
 from scapy.all import *
@@ -209,7 +212,7 @@ ans, unans = sr(packet, timeout=2)
 ans[0]
 ans[0][1].show()
 
-7b
+11b
 nc -l -p 8080 < image.jpg
 
 or 
@@ -234,7 +237,7 @@ Enter twice
 Enter twice and ctrl c
 Go back to browser and check 5000
 
-7c Badstore
+11c Badstore
 Go to browser 
 Put ipaddress
 Login as admin' -- 
@@ -248,7 +251,7 @@ itemdb --
 
 ------------------------------------------------------
 
-8a
+12a
 
 import socket(enter twice)
 
@@ -286,12 +289,12 @@ for port in ports:
     else:
         print(f"Port {port} is FILTERED or NO RESPONSE")
 
-8b 
+12b 
 nmap --script vuln 127.0.1.1
 
 nmap --script vuln 127.0.1.1 -oN txtgh.txt
 
-8c Badstore
+12c Badstore
 Go to browser 
 Put ipaddress
 Login as  supplier as joe@supplier.com
@@ -306,17 +309,17 @@ Again login supplier as with new user and password
 ------------------------------------------------------
 
 
-9a 
-same as 7b
-9b
-same as 4c
+13a 
+same as 11b
+13b
+same as 8c
 
-9c Badstore(2a)
+13c Badstore(6a)
 
 ------------------------------------------------------
 
 
-10a
+14a
 nano icmp_monitor.py
 
 from scapy.all import *
@@ -340,10 +343,10 @@ sudo python3 icmp_monitor.py
 in another terminal run
 ping 8.8.8.8
 
-10b
-same as 5c
+14b
+same as 9c
 
-10c Badstore
+14c Badstore
 
 Go to browser 
 Put ipaddress
@@ -357,7 +360,7 @@ Login with .bizz with new password
 ------------------------------------------------------
 
 
-11a
+15a
 nano scap.py 
 import scapy.all as scapy
 
@@ -377,14 +380,14 @@ for element in clients:
  sudo python3 scap.py 
 
 
-11b
-same as 7b
+15b
+same as 11b
 
-11 c Badstore(5a)
+15 c Badstore(9a)
 
 ------------------------------------------------------
 
-12 a
+16 a
 nano traceroute.py
 from scapy.all import *
 
@@ -399,8 +402,8 @@ result.show()
 
 sudo python3 traceroute.py
 
-12b
-same as 7b
+16b
+same as 11b
 
-12 c
-Badstore(5a)
+16 c
+Badstore(9a)
