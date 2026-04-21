@@ -289,6 +289,18 @@ for port in ports:
     else:
         print(f"Port {port} is FILTERED or NO RESPONSE")
 
+
+OR
+
+from scapy.all import *
+target = "www.google.com"
+for port in range(70, 85):
+    packet = IP(dst=target) / TCP(dport=port, flags="S")
+    response = sr1(packet, timeout=1, verbose=0)
+    if response:
+        print("Port", port, "is open")
+
+
 12b 
 nmap --script vuln 127.0.1.1
 
