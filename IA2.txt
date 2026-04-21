@@ -296,10 +296,11 @@ Go to browser
 Put ipaddress
 Login as  supplier as joe@supplier.com
 .....
-Login as admin
+Login as admin' --
 Change url to admin 
 Add user do it
-Change url to admin
+login as admin' --
+Change url to admin -> show current users
 Copy the password and make it to md5 
 Again login supplier as with new user and password 
 ------------------------------------------------------
