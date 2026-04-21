@@ -1,4 +1,4 @@
-1.
+1a.
 create a folder
 create a text file 
 paste an image
@@ -14,7 +14,63 @@ GIF: 47 49 46 38 39 61
 TIF: 99/49 49 2A 00 A0 C4
 WEBP: 52 49 46 46 AC 11
 
-2.
+1b.
+tcpdump -D
+
+sudo tcpdump -i any
+Ctrl + C
+
+sudo tcpdump -i any -w capture.pcap
+Ctrl + C
+
+# open new terminal
+ping google.com
+Ctrl + C
+
+# back to first terminal
+sudo tcpdump -i any tcp
+Ctrl + C
+
+sudo tcpdump -i any icmp
+Ctrl + C
+
+sudo tcpdump -i any port 80
+Ctrl + C
+
+sudo tcpdump -n -i any 'tcp[tcpflags] & tcp-syn != 0'
+Ctrl + C
+
+sudo tcpdump -n -i any 'tcp[tcpflags] & tcp-syn != 0' -w tcpsyn.pcap
+Ctrl + C
+
+sudo tcpdump -n -i any 'tcp[tcpflags] & tcp-ack != 0'
+Ctrl + C
+
+sudo tcpdump -n -i any 'tcp[tcpflags] & (tcp-syn|tcp-ack) != 0'
+Ctrl + C
+
+sudo tcpdump -n -i any 'tcp[tcpflags] & tcp-fin != 0' -w tcpfin.pcap
+Ctrl + C
+
+sudo tcpdump -r capture.pcap
+
+sudo tcpdump -A -r capture.pcap
+
+sudo tcpdump -xx -r capture.pcap
+
+1c.
+open wireshark
+select any
+go to firefox and run http://www.example.com
+go to wireshark and stop the captures and apply http as filter 
+check for 200 OK filter 
+right click http follow 
+then show three way handshake
+repeat it for https 
+give filter as ssl
+
+
+2a.
 -open paint and write and save it as .bmp
 -go to coagula(PROGRAM FILES) and open the file now  IN SOUND render it without blue 
 -save SOUND AS it as wav 
@@ -23,7 +79,7 @@ WEBP: 52 49 46 46 AC 11
 - add spectrogram 
 - all channel mixed
 
-3.
+2b.
 
 import numpy as np
 from PIL import Image
@@ -103,8 +159,69 @@ if __name__ == "__main__":
 
 (only png image)
 
+OR
+from PIL import image
+img = Image.open("your image page").convert("RGB")
+pixels = img.load()
 
-4.
+message = input("enter the message to be hidden")
+msg = message + "#"  
+
+bits = ''.join(format(ord(c), '08b') for c in msg)
+
+i = 0
+for y in range(img.height):
+    for x in range(img.width):
+        if i < len(bits):
+            r, g, b = pixels[x, y]
+            pixels[x, y] = ((r & ~1) | int(bits[i]), g, b)
+            i += 1
+
+img.save("stego.png")
+print("Message hidden!")
+
+
+img = Image.open("stego.png")
+pixels = img.load()
+
+bits = ""
+for y in range(img.height):
+    for x in range(img.width):
+        bits += str(pixels[x, y][0] & 1)
+
+msg = ""
+for i in range(0, len(bits), 8):
+    msg += chr(int(bits[i:i+8], 2))
+    if msg.endswith("#"):
+        break
+
+print("Hidden message:", msg[:-1])
+
+2c.
+openssl genrsa -out key.pri 2048
+cat key.pri
+
+openssl rsa -in key.pri -noout -text
+
+openssl rsa -in key.pri -out key.pub -pubout
+cat key.pub
+
+touch Earth.txt
+gedit Earth.txt
+
+openssl rsautl -encrypt -inkey key.pub -pubin -in Earth.txt -out Earth.enc
+openssl rsautl -decrypt -inkey key.pri -in Earth.enc -out Earth.dec
+cat Earth.dec
+
+openssl rand -hex 32 > encryption.key
+
+openssl rsautl -encrypt -inkey key.pub -pubin -in encryption.key -out encryption.key.enc
+openssl rsautl -decrypt -inkey key.pri -in encryption.key.enc -out encryption.key.dec
+
+cat encryption.key
+cat encryption.key.dec
+
+3a.
 cd Downloads
 mkdir lab
 cd lab
@@ -122,28 +239,7 @@ openssl enc -aes-128-ecb -d -in cipher2.bin -out output2.txt -K 0011223344556677
 xxd cipher2.bin
 cat output2.txt
 
-5.
-go to firefox and search for seedsecuritylabs
-seedlabs>1.0>cryptography labs>secretkeyencryption> download pic_original.bmp
-
-openssl enc -aes-128-ecb -e -in pic_original.bmp -out pic_ecb.bmp -K 0123456789abcdeffedcba9876543210
-
-openssl enc -aes-128-cbc -e -in pic_original.bmp -out pic_cbc.bmp -K 0123456789abcdeffedcba9876543210 -iv 00112233445566778899aabbccddeeff
-
-head -c 54 pic_original.bmp > header
-
-tail -c +55 pic_ecb.bmp > body_ecb
-cat header body_ecb > new_ecb.bmp
-
-tail -c +55 pic_cbc.bmp > body_cbc
-cat header body_cbc > new_cbc.bmp
-
-eog new_ecb.bmp
-eog new_cbc.bmp          
-
-
-6th
-
+3b.
 echo -n 12345 > f1.txt
 echo -n 1234567890 > f2.txt
 echo -n 1234567890abcdef > f3.txt
@@ -166,8 +262,9 @@ ls -l f*.bin
 xxd f1.txt
 xxd f1_nopad.txt
 
+3c. same as 1b
 
-7th
+4a.
 touch plain.txt
 gedit plain.txt (0123456789abcdef)
 ls -l plain.txt
@@ -204,87 +301,23 @@ openssl enc -aes-128-cbc -e -in plain.txt -out cipher2.bin -k
 xxd cipher1.bin
 xxd cipher2.bin
 
+4b.
+go to firefox and search for seedsecuritylabs
+seedlabs>1.0>cryptography labs>secretkeyencryption> download pic_original.bmp
 
-8th
-openssl genrsa -out key.pri 2048
-cat key.pri
+openssl enc -aes-128-ecb -e -in pic_original.bmp -out pic_ecb.bmp -K 0123456789abcdeffedcba9876543210
 
-openssl rsa -in key.pri -noout -text
+openssl enc -aes-128-cbc -e -in pic_original.bmp -out pic_cbc.bmp -K 0123456789abcdeffedcba9876543210 -iv 00112233445566778899aabbccddeeff
 
-openssl rsa -in key.pri -out key.pub -pubout
-cat key.pub
+head -c 54 pic_original.bmp > header
 
-touch Earth.txt
-gedit Earth.txt
+tail -c +55 pic_ecb.bmp > body_ecb
+cat header body_ecb > new_ecb.bmp
 
-openssl rsautl -encrypt -inkey key.pub -pubin -in Earth.txt -out Earth.enc
-openssl rsautl -decrypt -inkey key.pri -in Earth.enc -out Earth.dec
-cat Earth.dec
+tail -c +55 pic_cbc.bmp > body_cbc
+cat header body_cbc > new_cbc.bmp
 
-openssl rand -hex 32 > encryption.key
+eog new_ecb.bmp
+eog new_cbc.bmp          
 
-openssl rsautl -encrypt -inkey key.pub -pubin -in encryption.key -out encryption.key.enc
-openssl rsautl -decrypt -inkey key.pri -in encryption.key.enc -out encryption.key.dec
-
-cat encryption.key
-cat encryption.key.dec
-
-
-9th
-open wireshark
-select any
-go to firefox and run http://www.example.com
-go to wireshark and stop the captures and apply http as filter 
-check for 200 OK filter 
-right click http follow 
-then show three way handshake
-repeat it for https 
-give filter as ssl
-
-10th
-tcpdump -D
-
-sudo tcpdump -i any
-Ctrl + C
-
-sudo tcpdump -i any -w capture.pcap
-Ctrl + C
-
-# open new terminal
-ping google.com
-Ctrl + C
-
-# back to first terminal
-sudo tcpdump -i any tcp
-Ctrl + C
-
-sudo tcpdump -i any icmp
-Ctrl + C
-
-sudo tcpdump -i any port 80
-Ctrl + C
-
-sudo tcpdump -n -i any 'tcp[tcpflags] & tcp-syn != 0'
-Ctrl + C
-
-sudo tcpdump -n -i any 'tcp[tcpflags] & tcp-syn != 0' -w tcpsyn.pcap
-Ctrl + C
-
-sudo tcpdump -n -i any 'tcp[tcpflags] & tcp-ack != 0'
-Ctrl + C
-
-sudo tcpdump -n -i any 'tcp[tcpflags] & (tcp-syn|tcp-ack) != 0'
-Ctrl + C
-
-sudo tcpdump -n -i any 'tcp[tcpflags] & tcp-fin != 0' -w tcpfin.pcap
-Ctrl + C
-
-sudo tcpdump -r capture.pcap
-
-sudo tcpdump -A -r capture.pcap
-
-sudo tcpdump -xx -r capture.pcap
-
-sudo tcpdump -xx -r tcpsyn.pcap
-
-sudo tcpdump -xx -r tcpfin.pcap
+4c. same as  2c
